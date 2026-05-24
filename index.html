@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <meta name="theme-color" content="#6b4423" />
+  <title>BrewQada — Loading</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/loading.css" />
+</head>
+<body>
+  <div class="loading-screen" id="loading-screen" aria-live="polite" aria-busy="true">
+    <p class="loading-screen__logo">BrewQada</p>
+    <div class="loading-cup" aria-hidden="true">
+      <div class="loading-cup__steam"></div>
+      <div class="loading-cup__lid"></div>
+      <div class="loading-cup__body"></div>
+      <div class="loading-cup__handle"></div>
+    </div>
+    <p class="loading-screen__tagline">Brewing your dashboard…</p>
+    <div class="loading-screen__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="loading-screen__bar-fill" id="loading-bar"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var screen = document.getElementById("loading-screen");
+      var bar = document.getElementById("loading-bar");
+      var progress = 0;
+      var target = "dashboard.html";
+
+      var tick = setInterval(function () {
+        progress += Math.random() * 14 + 6;
+        if (progress > 100) progress = 100;
+        bar.style.width = progress + "%";
+        screen.setAttribute("aria-valuenow", Math.round(progress));
+        if (progress >= 100) {
+          clearInterval(tick);
+          screen.classList.add("is-done");
+          setTimeout(function () {
+            document.body.classList.add("app-reveal");
+            window.location.replace(target);
+          }, 650);
+        }
+      }, 280);
+    })();
+  </script>
+</body>
+</html>

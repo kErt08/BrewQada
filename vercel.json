@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "",
+  "rewrites": [
+    { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/menu", "destination": "/menu.html" },
+    { "source": "/system-analysis", "destination": "/system-analysis.html" },
+    { "source": "/owner-information", "destination": "/owner-information.html" },
+    { "source": "/validation-summary", "destination": "/validation-summary.html" }
+  ]
+}

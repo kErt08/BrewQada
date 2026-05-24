@@ -1,0 +1,238 @@
+/* BrewQada AI assistant */
+.ai-bot-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ai-bot-panel {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: min(380px, calc(100vw - 32px));
+  max-height: min(520px, calc(100vh - 100px));
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #faf4ea 0%, #f0e4d2 100%);
+  border: 2.5px solid var(--border, #4a3020);
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(61, 40, 23, 0.28);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(0.96);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.ai-bot-panel.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.ai-bot-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 2px solid var(--border, #4a3020);
+  background: linear-gradient(180deg, #9a6538 0%, #7a4f28 100%);
+  border-radius: 15px 15px 0 0;
+  color: #fff;
+}
+
+.ai-bot-panel__head h2 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-bot-panel__close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-bot-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 200px;
+  max-height: 340px;
+}
+
+.ai-bot-msg {
+  max-width: 92%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  animation: pageFadeUp 0.3s ease both;
+}
+
+.ai-bot-msg--bot {
+  align-self: flex-start;
+  background: #fff;
+  border: 1.5px solid rgba(74, 48, 32, 0.2);
+  color: var(--brown-text, #5c3d1e);
+}
+
+.ai-bot-msg--user {
+  align-self: flex-end;
+  background: linear-gradient(180deg, #9a6538 0%, #7a4f28 100%);
+  color: #fff;
+}
+
+.ai-bot-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 14px 10px;
+}
+
+.ai-bot-chip {
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1.5px solid var(--brown-mid, #6b4423);
+  background: #fff;
+  color: var(--brown-mid, #6b4423);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.ai-bot-chip:hover {
+  background: var(--brown-mid, #6b4423);
+  color: #fff;
+}
+
+.ai-bot-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px 14px;
+  border-top: 1.5px solid rgba(74, 48, 32, 0.15);
+}
+
+.ai-bot-form input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid rgba(74, 48, 32, 0.25);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.82rem;
+}
+
+.ai-bot-form button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #9a6538 0%, #7a4f28 100%);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Process / beneficiary lists on system analysis */
+.info-list {
+  list-style: none;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--brown-text);
+  text-align: left;
+  width: 100%;
+  max-width: 280px;
+}
+
+.info-list li {
+  padding: 4px 0;
+  padding-left: 18px;
+  position: relative;
+}
+
+.info-list li::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  color: var(--brown-mid);
+  font-weight: 700;
+}
+
+.tools-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tool-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  color: var(--brown-dark);
+}
+
+.process-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.74rem;
+  font-weight: 500;
+  line-height: 1.4;
+  width: 100%;
+  text-align: left;
+}
+
+.process-step__num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--brown-mid);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.process-step__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.process-arrow {
+  text-align: center;
+  color: var(--brown-mid);
+  font-size: 0.9rem;
+  line-height: 1;
+}

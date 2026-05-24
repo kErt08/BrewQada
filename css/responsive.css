@@ -1,0 +1,377 @@
+/* BrewQada — responsive layout (phone, tablet, desktop) */
+
+/* Safe areas & touch-friendly base */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.main,
+.dash-page,
+.menu-page,
+.owner-page,
+.val-page,
+.dashboard {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+:root {
+  --header-h: auto;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+button,
+.footer-link,
+.nav-item--link,
+.ai-bot-chip,
+.ai-bot-form button,
+.mobile-nav-toggle {
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.search-input,
+.ai-bot-form input {
+  font-size: 16px; /* prevents iOS zoom on focus */
+}
+
+/* Mobile menu toggle — hidden on desktop */
+.mobile-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #9a6538 0%, #7a4f28 100%);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--shadow);
+  flex-shrink: 0;
+}
+
+.mobile-nav-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+.sidebar-backdrop {
+  display: none;
+}
+
+/* —— Tablet (≤1100px) —— */
+@media (max-width: 1100px) {
+  .app {
+    min-height: 100dvh;
+    height: 100dvh;
+  }
+
+  .dash-page,
+  .menu-page,
+  .owner-page,
+  .val-page,
+  .dashboard {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .top-header {
+    padding: 16px 16px 12px;
+    padding-top: calc(12px + var(--safe-top));
+  }
+
+  .page-title {
+    white-space: normal;
+    font-size: clamp(1rem, 4vw, 1.35rem);
+    line-height: 1.25;
+  }
+
+  .metric-card .metric {
+    font-size: clamp(2rem, 8vw, 3.2rem);
+  }
+
+  .pain-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .earnings-amount {
+    font-size: clamp(1.75rem, 7vw, 2.4rem);
+  }
+
+  .employees-panel {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .gender-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .gender-labels {
+    position: static;
+    margin-top: 12px;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .client-panel {
+    padding-bottom: 16px;
+  }
+
+  .menu-category__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .menu-pricing-note {
+    font-size: 0.78rem;
+  }
+
+  .lightbox__panel {
+    max-width: calc(100vw - 24px);
+    margin: 12px;
+  }
+
+  .lightbox__img {
+    max-height: 70vh;
+  }
+}
+
+/* —— Phone (≤900px): slide-out navigation —— */
+@media (max-width: 900px) {
+  .mobile-nav-toggle {
+    display: flex;
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 280;
+    background: rgba(26, 18, 10, 0.55);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  body.nav-open .sidebar-backdrop {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(288px, 88vw);
+    max-width: 100%;
+    z-index: 290;
+    transform: translateX(-105%);
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    padding-top: var(--safe-top);
+    padding-left: var(--safe-left);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body.nav-open .sidebar {
+    transform: translateX(0);
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.25);
+  }
+
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  .main {
+    width: 100%;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .top-header {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "menu title"
+      "search search"
+      "profile profile";
+    gap: 10px 12px;
+    align-items: center;
+  }
+
+  .mobile-nav-toggle {
+    grid-area: menu;
+  }
+
+  .page-title {
+    grid-area: title;
+  }
+
+  .search-wrap {
+    grid-area: search;
+    order: unset;
+    width: 100%;
+  }
+
+  .profile {
+    grid-area: profile;
+    justify-self: end;
+  }
+
+  .nav-item {
+    font-size: 0.85rem;
+    padding: 14px 18px;
+  }
+
+  .brand-logo {
+    font-size: 1.65rem;
+  }
+
+  .ai-bot-panel {
+    left: 12px;
+    right: 12px;
+    bottom: calc(12px + var(--safe-bottom));
+    width: auto;
+    max-height: min(85vh, 560px);
+  }
+
+  .ai-bot-panel.is-open {
+    max-height: min(88dvh, 600px);
+  }
+
+  .ai-bot-messages {
+    max-height: min(50vh, 320px);
+  }
+
+  .map-wrap iframe {
+    height: min(240px, 45vh);
+  }
+}
+
+/* —— Small phone (≤480px) —— */
+@media (max-width: 480px) {
+  .top-header {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .profile > span:not(.sr-only) {
+    display: none;
+  }
+
+  .dash-page,
+  .menu-page,
+  .owner-page,
+  .val-page,
+  .dashboard {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: calc(20px + var(--safe-bottom));
+  }
+
+  .card,
+  .dash-card {
+    padding: 14px;
+  }
+
+  .flavor-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .flavor-item {
+    font-size: 0.72rem;
+    padding: 10px 8px;
+  }
+
+  .menu-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-card .price {
+    font-size: 0.8rem;
+  }
+
+  .owner-hero__title,
+  .val-hero__title {
+    font-size: clamp(1.15rem, 5vw, 1.45rem);
+  }
+
+  .summary-card__owners {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .summary-card__divider {
+    display: none;
+  }
+
+  .ai-bot-chips {
+    max-height: 72px;
+    overflow-y: auto;
+  }
+
+  .footer-link {
+    font-size: 0.88rem;
+  }
+
+  .loading-screen {
+    padding: 24px 16px;
+    padding-bottom: calc(24px + var(--safe-bottom));
+  }
+
+  .loading-cup {
+    transform: scale(0.9);
+  }
+}
+
+/* —— Large screens —— */
+@media (min-width: 901px) {
+  .mobile-nav-toggle {
+    display: none !important;
+  }
+}
+
+/* Landscape phones: slightly shorter AI panel */
+@media (max-height: 500px) and (orientation: landscape) {
+  .ai-bot-panel.is-open {
+    max-height: 92vh;
+  }
+
+  .ai-bot-messages {
+    min-height: 80px;
+    max-height: 35vh;
+  }
+
+  .sidebar {
+    overflow-y: auto;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-backdrop,
+  .ai-bot-panel {
+    transition: none;
+  }
+}
