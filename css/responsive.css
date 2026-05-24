@@ -179,23 +179,25 @@ button,
   }
 
   .sidebar {
-    position: fixed;
+    position: fixed !important;
     top: 0;
     left: 0;
     bottom: 0;
-    width: min(288px, 88vw);
-    max-width: 100%;
+    width: min(280px, 86vw) !important;
+    max-width: 86vw !important;
+    flex: none !important;
     z-index: 290;
-    transform: translateX(-105%);
+    transform: translate3d(-110%, 0, 0) !important;
     transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
     padding-top: var(--safe-top);
     padding-left: var(--safe-left);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    visibility: visible;
   }
 
   body.nav-open .sidebar {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0) !important;
     box-shadow: 8px 0 32px rgba(0, 0, 0, 0.25);
   }
 
@@ -203,10 +205,16 @@ button,
     overflow: hidden;
   }
 
+  .app {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+
   .main {
-    width: 100%;
-    flex: 1;
-    min-width: 0;
+    width: 100% !important;
+    max-width: 100vw !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
   }
 
   .top-header {
