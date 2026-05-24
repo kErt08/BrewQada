@@ -1,0 +1,159 @@
+/* BrewQada loading screen — cup lid open → close */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  background: linear-gradient(165deg, #3d2817 0%, #6b4423 45%, #8b5a2b 100%);
+  transition: opacity 0.65s ease, visibility 0.65s ease;
+}
+
+.loading-screen.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-screen__logo {
+  font-family: "Pacifico", cursive;
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: #f8f0e4;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  animation: logoPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
+.loading-cup {
+  width: 120px;
+  height: 140px;
+  position: relative;
+}
+
+.loading-cup__body {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88px;
+  height: 72px;
+  background: linear-gradient(180deg, #f8f0e4 0%, #e8d4b8 100%);
+  border: 3px solid #3d2817;
+  border-radius: 0 0 14px 14px;
+  box-shadow: inset 0 -8px 16px rgba(139, 90, 43, 0.25);
+}
+
+.loading-cup__body::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 12px;
+  right: 12px;
+  height: 28px;
+  background: linear-gradient(90deg, #c45c26 0%, #8b5a2b 50%, #2d6a4f 100%);
+  border-radius: 6px;
+  opacity: 0.85;
+}
+
+.loading-cup__handle {
+  position: absolute;
+  right: -6px;
+  bottom: 22px;
+  width: 22px;
+  height: 36px;
+  border: 3px solid #3d2817;
+  border-left: none;
+  border-radius: 0 12px 12px 0;
+}
+
+.loading-cup__lid {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 96px;
+  height: 28px;
+  margin-left: -48px;
+  background: linear-gradient(180deg, #d4a574 0%, #9a6538 100%);
+  border: 3px solid #3d2817;
+  border-radius: 8px 8px 4px 4px;
+  transform-origin: center bottom;
+  animation: lidCycle 2.4s steps(8) infinite;
+}
+
+.loading-cup__steam {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  width: 8px;
+  height: 24px;
+  margin-left: -4px;
+  background: rgba(248, 240, 228, 0.5);
+  border-radius: 50%;
+  filter: blur(4px);
+  opacity: 0;
+  animation: steamPuff 2.4s ease-in-out infinite;
+}
+
+@keyframes lidCycle {
+  0%   { transform: rotate(0deg) translateY(0); }
+  12%  { transform: rotate(-8deg) translateY(-2px); }
+  25%  { transform: rotate(-22deg) translateY(-6px); }
+  37%  { transform: rotate(-38deg) translateY(-10px); }
+  50%  { transform: rotate(-48deg) translateY(-14px); }
+  62%  { transform: rotate(-38deg) translateY(-10px); }
+  75%  { transform: rotate(-22deg) translateY(-6px); }
+  87%  { transform: rotate(-8deg) translateY(-2px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+@keyframes steamPuff {
+  0%, 45%, 100% { opacity: 0; transform: translateY(0) scale(0.8); }
+  50%, 70% { opacity: 0.7; transform: translateY(-12px) scale(1.1); }
+}
+
+.loading-screen__tagline {
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(248, 240, 228, 0.85);
+  letter-spacing: 0.04em;
+}
+
+.loading-screen__bar {
+  width: min(220px, 70vw);
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.loading-screen__bar-fill {
+  height: 100%;
+  width: 0%;
+  background: #f8f0e4;
+  border-radius: inherit;
+  transition: width 0.15s linear;
+}
+
+/* Dashboard reveal after loader */
+body.app-reveal .app {
+  animation: appReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes appReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

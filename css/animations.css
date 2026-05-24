@@ -1,0 +1,87 @@
+/* Page enter / content reveal */
+@keyframes pageFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sidebarSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cardStagger {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+body.page-ready .sidebar {
+  animation: sidebarSlide 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+body.page-ready .top-header {
+  animation: pageFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+
+body.page-ready .main-content-animate > * {
+  animation: cardStagger 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+body.page-ready .main-content-animate > *:nth-child(1) { animation-delay: 0.12s; }
+body.page-ready .main-content-animate > *:nth-child(2) { animation-delay: 0.18s; }
+body.page-ready .main-content-animate > *:nth-child(3) { animation-delay: 0.24s; }
+body.page-ready .main-content-animate > *:nth-child(4) { animation-delay: 0.3s; }
+body.page-ready .main-content-animate > *:nth-child(5) { animation-delay: 0.36s; }
+body.page-ready .main-content-animate > *:nth-child(6) { animation-delay: 0.42s; }
+body.page-ready .main-content-animate > *:nth-child(n+7) { animation-delay: 0.48s; }
+
+/* Search highlight */
+mark.search-hit {
+  background: linear-gradient(180deg, transparent 55%, #ffe08a 55%);
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+.search-no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 24px;
+  font-weight: 600;
+  color: var(--brown-mid);
+  animation: pageFadeUp 0.35s ease both;
+}
+
+/* Nav hover micro-motion */
+.nav-item--link {
+  transition: transform 0.15s, filter 0.15s;
+}
+
+.nav-item--link:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.page-ready .sidebar,
+  body.page-ready .top-header,
+  body.page-ready .main-content-animate > * {
+    animation: none;
+  }
+}
